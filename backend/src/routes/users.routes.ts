@@ -3,6 +3,7 @@ import multer from 'multer';
 import uploadConfig from '../config/upload';
 
 import CreateUserService from '../services/CreateUserService';
+import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 
 import ensureAuthenticated from '../middleware/ensureAuthenticated';
 
@@ -21,8 +22,14 @@ usersRouter.post('/', async (request, response) => {
       password,
     });
 
-    delete user.password;
-    response.send(user);
+    const userWithoutPassword = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    };
+    response.send(userWithoutPassword);
   } catch (error) {
     return response.status(400).json({ error: error.message });
   }
@@ -31,11 +38,29 @@ usersRouter.post('/', async (request, response) => {
 usersRouter.patch(
   '/avatar',
   ensureAuthenticated,
-  upload.single('avatar '),
+  upload.single('avatar'),
   async (request, response) => {
-    console.log(request.file);
+    try {
+      const updateUserAvatar = new UpdateUserAvatarService();
 
-    return response.json({ ok: true });
+      const user = await updateUserAvatar.execute({
+        user_id: request.user.id,
+        avatarFilename: request.file.filename,
+      });
+
+      const userWithoutPassword = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+      };
+
+      return response.json(userWithoutPassword);
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
+    }
   },
 );
 
