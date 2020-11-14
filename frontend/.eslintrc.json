@@ -34,6 +34,7 @@
     "react/prop-types": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "prettier/prettier": "error",
     "import/extensions": [
       "error",
