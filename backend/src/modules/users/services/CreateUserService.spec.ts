@@ -5,10 +5,10 @@ import CreateUserService from './CreateUserService';
 
 describe('CreateUser', () => {
   it('should be able to create a new user', async () => {
-    const fakeAppointmentsRepository = new FakeUsersRepository();
+    const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
     const createUser = new CreateUserService(
-      fakeAppointmentsRepository,
+      fakeUsersRepository,
       fakeHashProvider,
     );
 
