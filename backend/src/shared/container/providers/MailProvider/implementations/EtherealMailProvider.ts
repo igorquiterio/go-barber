@@ -43,7 +43,7 @@ export default class EtherealMailProvider implements IMailProvider {
         address: to.email,
       },
       subject,
-      text: await this.mailTemplateProvider.parse(templateData),
+      html: await this.mailTemplateProvider.parse(templateData),
     });
 
     console.log('message sent: %s', message.messageId);
