@@ -30,6 +30,7 @@ class ListProviderAppointmentsService {
     const cachedData = await this.cacheProvider.recover('asd');
 
     console.log(cachedData);
+
     const appointments = await this.appointmentsRepository.findAllInDayFromProvider(
       { provider_id, year, month, day },
     );
