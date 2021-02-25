@@ -1,12 +1,14 @@
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import styled from 'styled-components/native';
+import { FlatList } from 'react-native';
+import { Provider } from './index';
 
 export const Container = styled.View`
   flex: 1;
 `;
 
 export const Header = styled.View`
-  padding:24px;
+  padding: 24px;
   padding-top: ${getStatusBarHeight() + 24}px;
   background: #28262e;
 
@@ -27,7 +29,6 @@ export const UserName = styled.Text`
   font-family: 'RobotoSlab_Medium';
 `;
 
-
 export const ProfileButton = styled.TouchableOpacity``;
 
 export const UserAvatar = styled.Image`
@@ -35,3 +36,5 @@ export const UserAvatar = styled.Image`
   height: 56px;
   border-radius: 28px;
 `;
+
+export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)``;
